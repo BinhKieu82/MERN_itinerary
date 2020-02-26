@@ -20,7 +20,10 @@ app.use(
 );
 app.use(cors());
 
-app.use('/cities', require('./routes/cities'))
+app.use('/cities', require('./routes/cities'));
+app.use('/itineraries', require('./routes/itineraries'));
+//app.use('/itineraries/find',  require('./routes/itineraries'));
+app.use('/activities', require('./routes/activities'));
 
 
 app.listen(port, () => {

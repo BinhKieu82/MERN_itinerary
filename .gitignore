@@ -124,10 +124,6 @@ client/git_client/objects/f4/286a9ac374b2046a2fc159b82fd2d96206e25c
 client/git_client/objects/fc/44b0a3796c0e0a64c3d858ca038bd4570465d9
 client/git_client/refs/heads/master
 client/git_client/refs/remotes/MYitinerary/master
-client/Store/Actions/citiesRead.js
-client/Store/Actions/cityActions.js
-client/Store/Reducers/citiesReducer.js
-client/Store/Reducers/rootReducer.js
 server/git_server/COMMIT_EDITMSG
 server/git_server/config
 server/git_server/description
