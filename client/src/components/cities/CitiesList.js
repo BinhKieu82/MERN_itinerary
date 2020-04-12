@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
+import { DebounceInput } from "react-debounce-input";
 import PropTypes from 'prop-types';
-//import { connect } from 'react-redux';
 
 import City from './City';
-//import { readCities } from '../../store/actions/cityActions';
-//import Footer from '../Footer';
 
 
 
@@ -13,11 +11,6 @@ export default class CitiesList extends Component {
     super(props);
     this.state = { search: '' };    
  }
-
-  // componentDidMount() {
-  //   this.props.readCities(); 
-  //   console.log('cities',  this.props.cities);
-  // }
 
   handleChange = (event) =>{            
     this.setState ({ search: event.target.value });
@@ -36,14 +29,24 @@ export default class CitiesList extends Component {
   render() {
     return (      
       <div>
-        <label htmlFor="filter">Filter by City: </label>
-        <input type="text" id='first_name'
-          className="validate"
-          placeholder='enter your city'
-          value={ this.state.search }      
-          onChange={ this.handleChange }/>
-        { this.props.cities && this.filterCities() };     
-        {/* <Footer />    */}
+        <div className="row">
+          <div className="col s8 offset-s2">
+            <div className="input-field col s12">
+              <DebounceInput
+                minLength={2}
+                debounceTimeout={300}
+                placeholder='enter your city'
+                id="first_name"
+                type="text"
+                className="validate"
+                value={this.state.search}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="first_name">Search</label>
+            </div>
+          </div>
+        </div>        
+        { this.props.cities && this.filterCities() };    
       </div>
     );
   }
@@ -52,19 +55,3 @@ export default class CitiesList extends Component {
 CitiesList.propTypes = {
   filteredCities: PropTypes.func
 }
-
-// const mapStateToProps = (state) => {
-//   console.log(state.cities.cities);
-//   return {
-//     //get states from store
-//     cities: state.cities
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return ({
-//     readCities: () => dispatch(readCities())
-//   });
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

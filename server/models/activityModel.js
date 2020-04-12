@@ -6,4 +6,4 @@ const activitySchema = new mongoose.Schema({
   image: { type: String },
   alt: { type: String }
 });
-module.exports = Activity = mongoose.model("Activity", activitySchema);
+module.exports = mongoose.model("Activity", activitySchema);

@@ -4,23 +4,23 @@ import React, { Component } from 'react';
 //import Heart from './Heart';
 import SlickSlider from './SlickSlider';
 
-// function HastagList(props) {
-//   return itinerary.hashtags.map(hashtag => <Hashtag key={hashtag} hashtag={hashtag} />);
-// }
+function HastagList(props) {
+  return props.hashtags.map(hashtag => <Hashtag key={hashtag} hashtag={hashtag} />);
+}
 
 function Hashtag(props) {
-  const hashtag = `#${props.hashtags}`;
-  return <p>{hashtag}</p>;
+  return <p>{`#${props.hashtag}`}</p>;
 }
 
 export class Itinerary extends Component {
-  hastagList = () => {
-    let { itinerary } = this.props;
-    return itinerary.hashtags.map(hashtag => <Hashtag key={hashtag} hashtag={hashtag} />);
-  }
+  // hastagList = () => {
+  //   let { itinerary } = this.props;
+  //   return itinerary.hashtags.map(hashtag => <Hashtag key={hashtag} hashtag={hashtag} />);
+  // }
  
   render() {    
-    let { itinerary } = this.props;
+    let { itinerary, activities } = this.props;    
+    console.log(`Activities: ${activities}`);
     return ( 
       <li className="itinerary">
        <div className="row itinerary-content">
@@ -40,7 +40,7 @@ export class Itinerary extends Component {
            {/* <Heart itinerary={itinerary} /> */}
 
            <div className="col s4">
-             <h4>Likes: {itinerary.rating}</h4>
+             <h4>Rate: {itinerary.rating}</h4>
            </div>
            <div className="col s4">
              <h4>Hours: {itinerary.duration}</h4>
@@ -50,8 +50,8 @@ export class Itinerary extends Component {
                Price: <span className="price">{itinerary.price}</span>
              </h4>
            </div>
-           {this.hastagList}
-           {/* <HastagList hashtags={itinerary.hashtags} /> */}
+           {/* {this.hastagList} */}
+           <HastagList hashtags={itinerary.hashtags} />
          </div>
        </div>
        <div className="collapsible-header">
@@ -60,7 +60,7 @@ export class Itinerary extends Component {
        </div>
        <div className="collapsible-body">
           <h3>Find the best activities!</h3>
-          <SlickSlider itinerary={itinerary} />
+          <SlickSlider itinerary={ itinerary } />
        </div>
      </li>
     )

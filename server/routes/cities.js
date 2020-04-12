@@ -13,8 +13,7 @@ router.get('/all', (req, res) => {
 
 router.get('/:name',
 	(req, res) => {
-  		let cityRequested = req.params.name;
-  		cityModel.findOne({ name: cityRequested })
+  		cityModel.findOne({ name: req.params.name })
 			.then(city => {
 				res.send(city)
 			})

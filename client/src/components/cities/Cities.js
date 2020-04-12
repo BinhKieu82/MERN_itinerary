@@ -1,54 +1,64 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
 
-import CitiesList from './CitiesList';
-import Footer from '../Footer';
-import { readCities } from '../../store/actions/cityActions';
+import CitiesList from "./CitiesList";
+import Footer from "../Footer.js";
+import { readCities } from "../../store/actions/cityActions";
 
-
-
-class Cities extends Component {
-  constructor(props){
+export class Cities extends Component {
+  constructor(props) {
     super(props);
-    this.state = { };
- }
+    this.state = [];
+  }
 
   async componentWillMount() {
-    await this.props.readCities();    
+    if (this.props.cities.cities.length === 0) {
+      await this.props.readCities(); 
+    }
     console.log('cities',  this.props.cities);
   }
 
-  
-  render() {
-    localStorage.setItem("url", this.props.match.url);
-    console.log(this.props.cities);   
-    
+  loader() {
     return (
       <div>
-        <CitiesList cities={this.props.cities} /> 
-        <Footer />  
+        <div className="lds-css ng-scope">
+          <div className="lds-ripple">
+            <div />
+            <div />
+          </div>
+        </div>
       </div>
-    )
+    );
+  }
+
+  content() {
+    return (
+      <div>
+        <div id="all-cities" className="all-cities">
+          <CitiesList cities={this.props.cities} />
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    localStorage.setItem("url", this.props.match.url);
+    return (
+      <div>
+        {!this.props.cities.isLoading ? this.content() : this.loader()}
+        <Footer />
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state.cities);
   return {
-    //get states from store
     cities: state.cities
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    readCities: () => dispatch(readCities())
-  }
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cities);
-
-
-
+export default connect(
+  mapStateToProps,
+  { readCities }
+)(Cities);

@@ -1,6 +1,7 @@
 import axios from 'axios';
 //import * as types from './actionTypes';
 
+
 export function readingCities() {
   return { type: 'READ_CITIES' };
 }

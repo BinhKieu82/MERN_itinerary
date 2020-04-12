@@ -8,11 +8,11 @@ import M from "materialize-css";
 
 class Itineraries extends Component {
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log(`id: ${this.props.match.params.id}`);
-    await this.props.readItineraries(this.props.match.params.id);
-    await this.props.readActivities(this.props.match.params.id);
-    console.log(this.props.itineraries.itineraries);
+    this.props.readItineraries(this.props.match.params.id);
+    this.props.readActivities(this.props.match.params.id);
+    console.log(this.props.activites);
   }
 
   componentDidUpdate() {
@@ -20,21 +20,20 @@ class Itineraries extends Component {
     M.Collapsible.init(elems, { inDuration: 300 });
   }
 
-  loader() {
-    return (
-      <div>
-        <div className="lds-css ng-scope">
-          <div className="lds-ripple">
-            <div />
-            <div />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // loader() {
+  //   return (
+  //     <div>
+  //       <div className="lds-css ng-scope">
+  //         <div className="lds-ripple">
+  //           <div />
+  //           <div />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   getCity() {
-    console.log( this.props.itineraries.itineraries);
     return (
       this.props.itineraries.itineraries
         .map(itinerary => itinerary.city.name)
@@ -70,7 +69,7 @@ class Itineraries extends Component {
     localStorage.setItem("url", this.props.match.url);
     return (
       <div className="itineraries">
-        {!this.props.itineraries.isLoading ? this.content() : this.loader()}
+        {!this.props.itineraries.isLoading ? this.content() : <h4>Please login to see itineraries</h4>}
         <Footer back={"/cities"} />
       </div>
     );
@@ -78,7 +77,7 @@ class Itineraries extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.itineraries.itineraries);
+  console.log(`State itineraries: ${state.itineraries}`);
   return {
     itineraries: state.itineraries
   };

@@ -16,4 +16,4 @@ const itinerarySchema = new mongoose.Schema({
   hashtags: { type: Array }
 });
 
-module.exports = Itinerary =  mongoose.model('Itinerary', itinerarySchema)
+module.exports = mongoose.model('Itinerary', itinerarySchema)

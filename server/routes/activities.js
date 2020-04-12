@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 const activityModel = require("../models/activityModel");
 
-router.get('/:id', (req, res) => { //path to guide front-end action point to get data
-  activityModel.find({ city: req.params.id }) //query a specified city by city id
-    .populate("itinerary", "title") //access to ref itinerary in activityModel
-    .populate("city", "name") //access to ref city in activityModel
+router.route("/:id").get(auth, (req, res) => {
+  activityModel.find({ city: req.params.id })
+    .populate("itinerary", "title")
+    .populate("city", "name")
     .exec((err, activities) => {
-      res.json(activities); //return activityModel dataset from MongoBD, action function in front-end will receive it
+      res.json(activities);
     });
 });
 
-router.get('/', (req, res) => { //path to guide front-end action point to get data
-  activityModel.find({}, (err, activities) => { //query all data in activityModel from MongoBD
+router.route("/").get(auth, (req, res) => {
+  activityModel.find({}, (err, activities) => {
     res.json(activities);
   });
 });
-
 module.exports = router;
