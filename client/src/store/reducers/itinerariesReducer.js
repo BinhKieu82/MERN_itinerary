@@ -1,5 +1,5 @@
 const initialState = {
-  itineraries: [],
+  itineraries: [], //will be used as props (mapStateToProps: this.props.itineraries.itineraries) in itineraries components
   isLoading: false,
   error: {}
 };
@@ -16,7 +16,7 @@ export default function itinerariesReducer(state = initialState, action) {
     case "READ_ITINERARIES_SUCCESS":
       return {
         ...state,
-        itineraries: action.itineraries,
+        itineraries: action.itineraries, //res.data in itineraryActions
         error: {},
         isLoading: false
       };

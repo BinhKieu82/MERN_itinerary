@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-//const bodyParser = require("body-parser");
 const cors = require("cors");
 const config = require('config');
 
@@ -13,13 +12,14 @@ mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true })
     .then(() => console.log('Connection to Mongo DB established'))
     .catch(err => console.log(err));
 
-//app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 app.use('/cities',require('./routes/cities'));
 app.use('/itineraries', require('./routes/itineraries'));
-app.use('/activities', require('./routes/activities'));
+app.use('/itineraries/find', require('./routes/itineraries'));
+app.use("/activities",require('./routes/activities'));
+app.use('/comments', require('./routes/comments'));
 app.use('/users', require('./routes/users'));
 app.use('/auth', require('./routes/auth'));
 

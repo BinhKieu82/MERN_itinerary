@@ -7,9 +7,8 @@ import { connect } from "react-redux";
 export class SlickSlider extends Component {
   //finds the activities for each itinerary
   findActivities = (itinerary, activities) => {
-    return activities.filter(
-      activity => {      
-        console.log(itinerary._id);
+    return activities.filter(activity => {      
+        console.log(activity.itinerary._id);
         return activity.itinerary._id === itinerary._id;      
       });
   };
@@ -24,11 +23,11 @@ export class SlickSlider extends Component {
     };
 
     //activities for that specific Itinerary
-    const activities = this.findActivities(
+    let activities = this.findActivities(
       this.props.itinerary,
       this.props.activities.activities
     );      
-    console.log(`SlickSlice: ${activities}`);
+    console.log(`Activities: ${activities}`);
     return (
       <div>
         <Slick ref="slick" {...settings}>

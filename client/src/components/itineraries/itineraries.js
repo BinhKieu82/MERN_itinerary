@@ -4,15 +4,17 @@ import Footer from "../Footer";
 import { connect } from "react-redux";
 import { readItineraries } from "../../store/actions/itineraryActions";
 import { readActivities } from "../../store/actions/activityActions";
+import { fetchComments } from "../../store/actions/commentActions";
 import M from "materialize-css";
 
 class Itineraries extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log(`id: ${this.props.match.params.id}`);
-    this.props.readItineraries(this.props.match.params.id);
-    this.props.readActivities(this.props.match.params.id);
-    console.log(this.props.activites);
+    await this.props.readItineraries(this.props.match.params.id);
+    await this.props.readActivities(this.props.match.params.id);
+    await this.props.fetchComments(this.props.match.params.id);
+    console.log('Activities:', this.props.activities);
   }
 
   componentDidUpdate() {
@@ -20,18 +22,18 @@ class Itineraries extends Component {
     M.Collapsible.init(elems, { inDuration: 300 });
   }
 
-  // loader() {
-  //   return (
-  //     <div>
-  //       <div className="lds-css ng-scope">
-  //         <div className="lds-ripple">
-  //           <div />
-  //           <div />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  loader() {
+    return (
+      <div>
+        <div className="lds-css ng-scope">
+          <div className="lds-ripple">
+            <div />
+            <div />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   getCity() {
     return (
@@ -69,7 +71,7 @@ class Itineraries extends Component {
     localStorage.setItem("url", this.props.match.url);
     return (
       <div className="itineraries">
-        {!this.props.itineraries.isLoading ? this.content() : <h4>Please login to see itineraries</h4>}
+        {!this.props.itineraries.isLoading ? this.content() : this.loader()}
         <Footer back={"/cities"} />
       </div>
     );
@@ -87,6 +89,7 @@ export default connect(
   mapStateToProps,
   {
     readItineraries,
-    readActivities
+    readActivities,
+    fetchComments
   }
 )(Itineraries);

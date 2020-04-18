@@ -58,7 +58,7 @@ export function readItinerariesFailure(error) {
 //       });
 //   };
 // }
-export const readItineraries = cityId => (dispatch, getState) => {
+export const readItineraries = (cityId) => (dispatch, getState) => {
   dispatch(readingItineraries());
   axios
     .get(`/itineraries/${cityId}`, tokenConfig(getState))
@@ -72,6 +72,6 @@ export const readItineraries = cityId => (dispatch, getState) => {
     })
     .catch(err => {
       console.log(err);
-      dispatch(readItinerariesFailure(err.response.data));
+      dispatch(readItinerariesFailure(err.data));
     });
 }

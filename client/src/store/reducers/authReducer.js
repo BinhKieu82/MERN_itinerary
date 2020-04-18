@@ -13,7 +13,9 @@ const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   isLoading: false,
-  user: null
+  user: null,
+  image: null,
+  favorites: []
 }
 
 export default function(state = initialState, action) {
@@ -28,7 +30,8 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload
+        user: action.payload,
+        image: action.user.google ? action.user.google.image : null,
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
@@ -51,6 +54,24 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false
       };
+      case "ADD_FAVORITE":
+        return {
+          ...state,
+          isAuthenticated: true,
+          isLoading: false,
+          user: action.payload,
+          favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
+        };
+      case "REMOVE_FAVORITE":
+        return {
+          ...state,
+          isAuthenticated: true,
+          isLoading: false,
+          user: action.payload,
+          favorites: state.favorites.filter(
+            itinerary => itinerary !== action.itinerary
+          )
+        };
     default:
       return state;
   }

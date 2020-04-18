@@ -32,6 +32,7 @@ export default class CitiesList extends Component {
         <div className="row">
           <div className="col s8 offset-s2">
             <div className="input-field col s12">
+              <label htmlFor="first_name">Search</label>
               <DebounceInput
                 minLength={2}
                 debounceTimeout={300}
@@ -41,8 +42,7 @@ export default class CitiesList extends Component {
                 className="validate"
                 value={this.state.search}
                 onChange={this.handleChange}
-              />
-              <label htmlFor="first_name">Search</label>
+              />              
             </div>
           </div>
         </div>        

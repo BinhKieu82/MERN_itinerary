@@ -43,10 +43,6 @@ export const readActivities = cityId => (dispatch, getState) => {
     .get(`/activities/${cityId}`, tokenConfig(getState))
     .then(res => {
       dispatch(readActivitiesSuccess(res.data));
-      console.log(
-        `Activities for this city: (${res.data.length}) , cityID: ${cityId}, ${res.data.map(
-          iti => iti.alt
-        )}`);
     })
     .catch(err => {
       console.log(err);

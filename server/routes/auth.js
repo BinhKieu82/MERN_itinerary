@@ -1,14 +1,15 @@
 //routes/auth.js authenticate the user credentials either match with the database or not
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../models/userModel");
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+
+const User = require('../models/userModel');
 const auth = require('../middleware/auth');
 
 
-/* POST user */
+/* validate POST user - register */
 router.post("/", function(req, res, next) { //signup backend route
   const { email, password } = req.body;
   if(!email || !password) { //simple validation input fields

@@ -78,7 +78,7 @@ class AppNavbar extends Component {
             {console.log('isAuthenticated:', isAuthenticated)}
             <NavbarToggler onClick={this.toggle} />
             <Collapse className='outerWrapper' isOpen={this.state.isOpen} navbar >
-              <Nav className='ml-auto navbar'>
+              <Nav className='ml-auto navbar innerWrapper'>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>

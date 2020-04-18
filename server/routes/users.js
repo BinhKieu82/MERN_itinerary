@@ -12,7 +12,7 @@ router.get("/", function(req, res, next) {
 });
 
 /* GET user profile. */
-router.get("/", function(req, res, next) {
+router.get("/profile", function(req, res, next) {
   res.send(req.user);
 });
 
@@ -56,14 +56,13 @@ router.post("/", function(req, res, next) { //signup backend route
         })
       })
     })
-  //res.send(req.user);
-  // res.json({ succes: true, message: "Login successful" });
 });
 
-router.route("/favorites").put((req, res) => {
+router.route("/favorites").put((req, res) => { //update the userModel
   let isInArray = req.user.favorites.some(iti =>
-    iti.equals(req.body.itinerary)
+    iti.equals(req.body.itinerary) //id of itinerary requested from client
   );
+  //console.log('Backend user/favorites:', isInArray);
   if (!isInArray) {
     User.findByIdAndUpdate(req.user.id, {
       favorites: [...req.user.favorites, req.body.itinerary]
@@ -72,12 +71,12 @@ router.route("/favorites").put((req, res) => {
     });
   } else {
     User.findByIdAndUpdate(req.user.id, {
-      $pull: {
+      $pull: { //remove an id from itinerary array of userModel
         favorites: req.body.itinerary
       }
     }).then(currentUser => {
       res.status(202).send(req.body.itinerary);
-    });
+    }).catch(err => {res.send(err)});
   }
 });
 

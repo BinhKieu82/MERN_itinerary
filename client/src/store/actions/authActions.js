@@ -13,6 +13,20 @@ import {
   REGISTER_FAIL
 } from './types';
 
+export function addFavorite(id) {
+  return {
+    type: "ADD_FAVORITE",
+    itinerary: id
+  };
+}
+
+export function removeFavorite(id) {
+  return {
+    type: "REMOVE_FAVORITE",
+    itinerary: id
+  };
+}
+
 //check token & load user
 export const loadUser =() => (dispatch, getState) => {
   //User loading
@@ -24,7 +38,7 @@ export const loadUser =() => (dispatch, getState) => {
     payload: res.data //return from backend: user {id, name, email}
   }))
   .catch(err => {
-    dispatch(returnErrors(err.response.data, err.response.status));
+    dispatch(returnErrors(err.msg, err.status));
     dispatch({
       type: AUTH_ERROR
     })
@@ -89,6 +103,29 @@ export const logout = () => { //no need dispatch
   return {
     type: LOGOUT_SUCCESS
   };
+}
+
+export const postFavorite = (id) => (dispatch, getState) => {
+  axios
+    .put(
+      "/users/favorites",
+      {
+        itinerary: id
+      },
+      tokenConfig(getState)
+    )
+    .then(res => {
+      if (res.status === 201) {
+        console.log(`Itinerary ${res.data} ADDED to your favorites.`);
+        dispatch(addFavorite(res.data));
+      } else if (res.status === 202) {
+        console.log(`Itinerary ${res.data} REMOVED from your favorites.`);
+        dispatch(removeFavorite(res.data));
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 //Setup config/headers & token, that will be reusable
