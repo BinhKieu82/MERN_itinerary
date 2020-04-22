@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Navbar,
   Collapse,
@@ -59,9 +60,9 @@ class AppNavbar extends Component {
         </NavItem>
         <NavItem>
           <LoginModal />
-        </NavItem>
-      </Fragment>
-    );
+        </NavItem> 
+    </Fragment>
+    );   
 
     return (
       <div>
@@ -71,10 +72,12 @@ class AppNavbar extends Component {
               <i style={iStyle} className="material-icons">
                 account_circle
               </i>
-              <span className='navbar-text mr-3'>
-                <strong>{user ? `Welcome ${user.name}` : ''}</strong>
-              </span>
-            </div>            
+              <NavLink to="/favorites">
+                <span className='navbar-text mr-3'>
+                  <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+                </span>
+              </NavLink>
+            </div>           
             {console.log('isAuthenticated:', isAuthenticated)}
             <NavbarToggler onClick={this.toggle} />
             <Collapse className='outerWrapper' isOpen={this.state.isOpen} navbar >

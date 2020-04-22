@@ -49,9 +49,6 @@ class Comments extends Component {
       this.setState({
         comments: comments
       });
-      //this querySelector inside the if prevents the toast to appear if there is another
-      //toast active. It gets twice inside this else if so that's why I don't want
-      //a second toast for the same comment
     } else if (
       nextProps.comments.toast === true &&
       !document.querySelector(".toast")

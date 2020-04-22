@@ -28,7 +28,7 @@ export function removeFavorite(id) {
 }
 
 //check token & load user
-export const loadUser =() => (dispatch, getState) => {
+export const loadUser = () => (dispatch, getState) => {
   //User loading
   dispatch({ type: USER_LOADING });
 
@@ -85,7 +85,7 @@ export const login = ({ email, password }) => dispatch => {
     .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data //an object includes token, user {id, name, email}
       })
     )
     .catch(err => {
@@ -105,7 +105,7 @@ export const logout = () => { //no need dispatch
   };
 }
 
-export const postFavorite = (id) => (dispatch, getState) => {
+export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
   axios
     .put(
       "/users/favorites",

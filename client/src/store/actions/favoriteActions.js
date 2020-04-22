@@ -25,7 +25,7 @@ export const fetchFavorites = () => (dispatch, getState) => {
     .get(`/itineraries/find/favorites/user`, tokenConfig(getState))
     .then(res => {
       console.log(
-        `Favorites itineraries: (${res.data.length}) ${res.data.map(
+        `Fontend Favorites itineraries: (${res.data.length}) ${res.data.map(
           it => it.title
         )}`
       );

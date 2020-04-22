@@ -62,7 +62,7 @@ router.route("/favorites").put((req, res) => { //update the userModel
   let isInArray = req.user.favorites.some(iti =>
     iti.equals(req.body.itinerary) //id of itinerary requested from client
   );
-  //console.log('Backend user/favorites:', isInArray);
+  console.log('Backend user/favorites:', isInArray);
   if (!isInArray) {
     User.findByIdAndUpdate(req.user.id, {
       favorites: [...req.user.favorites, req.body.itinerary]

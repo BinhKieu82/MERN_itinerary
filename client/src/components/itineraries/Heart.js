@@ -11,6 +11,7 @@ export class Heart extends Component {
 
   loggedInHeart() {
     if (this.props.auth.favorites.includes(this.props.itinerary._id)) {
+      console.log('Heart:', this.props.itinerary._id);
       return (
         <span
           className="favorite col s2"

@@ -46,7 +46,7 @@ router.post("/", function(req, res, next) { //signup backend route
     })
 });
 
-//Get user
+//Get user for loaduser()/authActions react
 router.get('/user', auth, (req, res) => {
   User.findById(req.user.id)
     .select('-password') //dis-regard password (not return password)

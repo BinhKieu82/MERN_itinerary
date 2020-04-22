@@ -20,7 +20,7 @@ export default class CitiesList extends Component {
     let filteredCities = this.props.cities.cities.filter(city => {       
       return city.name.toLowerCase().includes (this.state.search.toLowerCase())
     }); 
-    console.log('Test', filteredCities);
+    console.log('cityFilter', filteredCities);
     return filteredCities.map((city, index) =>           
       <City city={city} key={index} />               
     );

@@ -64,7 +64,7 @@ export const fetchComments = (cityId) => (dispatch, getState) => {
       console.log(`comments section: Authorized.`);
     })
     .catch(err => {
-      console.log(`comments section: ${err.response.data}`);
+      console.log(`comments section: ${err.data}`);
       dispatch(fetchCommentsFailure(err.message));
     }); 
 }

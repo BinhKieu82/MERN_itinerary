@@ -6,7 +6,9 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE
 } from '../actions/types';
 
 const initialState = {
@@ -30,8 +32,8 @@ export default function(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload,
-        image: action.user.google ? action.user.google.image : null,
+        user: action.payload.user,
+        image: action.user.google ? action.user.google.image : null, //nothing in login() authActions
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
@@ -54,24 +56,28 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false
       };
-      case "ADD_FAVORITE":
-        return {
-          ...state,
-          isAuthenticated: true,
-          isLoading: false,
-          user: action.payload,
-          favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
-        };
-      case "REMOVE_FAVORITE":
-        return {
-          ...state,
-          isAuthenticated: true,
-          isLoading: false,
-          user: action.payload,
-          favorites: state.favorites.filter(
-            itinerary => itinerary !== action.itinerary
-          )
-        };
+    case ADD_FAVORITE:
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,  
+        ...action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload.user,
+        favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
+      };
+    case REMOVE_FAVORITE:
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload.user,
+        favorites: state.favorites.filter(
+          itinerary => itinerary !== action.itinerary
+        )
+      };
     default:
       return state;
   }

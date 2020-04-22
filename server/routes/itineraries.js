@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const User = require("../models/userModel");
 const City = require("../models/cityModel");
 const Itinerary = require('../models/itineraryModel');
 const auth = require('../middleware/auth');
@@ -13,8 +14,8 @@ router.get('/all', auth, (req, res) => { //for testing only
 });
 
 router.route("/:id").get(auth, (req, res) => {
-  Itinerary.find({ city: req.params.id })
-    .populate("city", "name")
+  Itinerary.find({ city: req.params.id }) //response the city with id matched
+    .populate("city", "name") //refer to city object and city.name
     .exec((err, itineraries) => {
       if (err) {
         res
@@ -40,14 +41,15 @@ router.route("/:id").get(auth, (req, res) => {
 // });
 
 router.get("/favorites/user", auth, (req, res) => {
-  Itinerary.find({ _id: { $in: req.user.favorites } }) //find all 'id' in req.user.favorites array
+  Itinerary.find({ _id: { $in: req.user.favorites } }) //find all 'id' in req.user.favorites array & matching with itinerary._id
     .populate("city", "name")
     .exec((err, itineraries) => {
       if (err) {
         res.status(400).send(err);
         return;
       }
-      res.json(itineraries);
+      console.log('backend itinerary._id:', itineraries);
+      res.json(itineraries); //response city object of an itinerary id matched
     });
 });
 

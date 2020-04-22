@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import M from "materialize-css";
 import PropTypes from 'prop-types';
 
-export class Favorites extends Component {
+class Favorites extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     favorites: PropTypes.object.isRequired,
@@ -16,15 +16,15 @@ export class Favorites extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchFavorites();
+    this.props.fetchFavorites(); //receiver user.itinerary._id array
     this.props.fetchAllComments();
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.auth.favorites !== nextProps.auth.favorites) {
-      this.props.fetchFavorites();
-    }
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   if (this.props.auth.favorites !== nextProps.auth.favorites) {
+  //     this.props.fetchFavorites();
+  //   }
+  // }
 
   componentDidUpdate() {
     var elems = document.querySelectorAll(".collapsible");
@@ -51,7 +51,7 @@ export class Favorites extends Component {
           <h1>Favorite Itineraries</h1>
           <ul className="collapsible">
             <ItinerariesList
-              itineraries={this.props.favorites.payload}
+              itineraries={this.props.favorites.payload} //array of itinerary._id
               fav={true}
             />
           </ul>
@@ -80,7 +80,7 @@ export class Favorites extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
+    auth: state.auth, //is an object contains {token, isAuthenticated, isLoading, user, image, favorites}
     favorites: state.favorites
   };
 };
