@@ -8,8 +8,8 @@ import "./styles/App.css";
 import store from './store/store';
 
 class App extends Component {
-  async componentDidMount() {
-    await store.dispatch(loadUser());  
+  componentDidMount() {
+    
   }
   render() {
     return (

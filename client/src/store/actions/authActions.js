@@ -31,17 +31,23 @@ export function removeFavorite(id) {
 export const loadUser = () => (dispatch, getState) => {
   //User loading
   dispatch({ type: USER_LOADING });
-
+  console.log('userloader', tokenConfig(getState));
   axios.get('/auth/user', tokenConfig(getState))
-  .then(res => dispatch({ 
-    type: USER_LOADED,
-    payload: res.data //return from backend: user {id, name, email}
-  }))
+  .then(res => {
+    console.log(res.data);
+    
+    dispatch({ 
+      type: USER_LOADED,
+      payload: res.data //return from backend: user {id, name, email}
+    })
+  })
   .catch(err => {
-    dispatch(returnErrors(err.msg, err.status));
+    console.log("error", err);
+    
+   /* dispatch(returnErrors(err.msg, err.status));
     dispatch({
       type: AUTH_ERROR
-    })
+    })*/
   })
 }
 
@@ -131,8 +137,9 @@ export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
 //Setup config/headers & token, that will be reusable
 export const tokenConfig = getState => {
   //Get token from localstorage
-  const token = getState().auth.token; //auth reducer from rootreducer. token stored in localstorage
-  
+  //const token = getState().auth.token; //auth reducer from rootreducer. token stored in localstorage
+  const token = localStorage.getItem('token')
+
   //Headers
   const config = {
     headers: {
