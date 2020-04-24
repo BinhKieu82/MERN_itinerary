@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {loadUser} from "./store/actions/authActions"
+//import {loadUser} from "./store/actions/authActions"
 import './styles/index.css';
 import App from './App';
 import store from './store/store';
 import * as serviceWorker from './serviceWorker';
-store.dispatch(loadUser());  
+
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

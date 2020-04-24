@@ -38,16 +38,16 @@ export const loadUser = () => (dispatch, getState) => {
     
     dispatch({ 
       type: USER_LOADED,
-      payload: res.data //return from backend: user {id, name, email}
+      payload: res.data //return from backend: {token, user {id, name, email}}
     })
   })
   .catch(err => {
     console.log("error", err);
     
-   /* dispatch(returnErrors(err.msg, err.status));
+   dispatch(returnErrors(err.msg, err.status));
     dispatch({
       type: AUTH_ERROR
-    })*/
+    })
   })
 }
 
@@ -137,8 +137,8 @@ export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
 //Setup config/headers & token, that will be reusable
 export const tokenConfig = getState => {
   //Get token from localstorage
-  //const token = getState().auth.token; //auth reducer from rootreducer. token stored in localstorage
-  const token = localStorage.getItem('token')
+  const token = getState().auth.token; //auth reducer from rootreducer. token stored in localstorage
+  //const token = localStorage.getItem('token')
 
   //Headers
   const config = {

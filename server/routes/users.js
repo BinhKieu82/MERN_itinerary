@@ -2,17 +2,20 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
+const Itinerary = require('../models/itineraryModel');
+const auth = require('../middleware/auth');
+
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken'); //token stored in www.jwt.io service for a specific time, not in MongoDB
 
 /* GET users listing. */
-router.get("/", function(req, res, next) {
+router.get("/", auth, function(req, res, next) {
   res.send("respond with a resource");
 });
 
 /* GET user profile. */
-router.get("/profile", function(req, res, next) {
+router.get("/profile", auth, function(req, res, next) {
   res.send(req.user);
 });
 
@@ -58,11 +61,12 @@ router.post("/", function(req, res, next) { //signup backend route
     })
 });
 
-router.route("/favorites").put((req, res) => { //update the userModel
+router.route("/favorites").put(auth, (req, res) => { //update the userModel
+  console.log('Backend user favorites:', req.user);
   let isInArray = req.user.favorites.some(iti =>
     iti.equals(req.body.itinerary) //id of itinerary requested from client
   );
-  console.log('Backend user/favorites:', isInArray);
+  //console.log('Backend user/favorites:', isInArray);
   if (!isInArray) {
     User.findByIdAndUpdate(req.user.id, {
       favorites: [...req.user.favorites, req.body.itinerary]
@@ -78,6 +82,21 @@ router.route("/favorites").put((req, res) => { //update the userModel
       res.status(202).send(req.body.itinerary);
     }).catch(err => {res.send(err)});
   }
+});
+
+router.get("/favorites/user", auth, (req, res) => {
+  //console.log('backend itinerary User :', req.user );
+  User.findById(req.user.id)
+    .select('-password')
+    .populate("favorites")
+    .exec((err, itineraries) => {
+      if (err) {
+        res.status(400).send(err);
+        return;
+      }
+      console.log('backend user itinerary:', itineraries);
+      res.json(itineraries);
+    }); 
 });
 
 module.exports = router;

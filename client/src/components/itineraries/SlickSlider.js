@@ -8,7 +8,7 @@ export class SlickSlider extends Component {
   //finds the activities for each itinerary
   findActivities = (itinerary, activities) => {
     return activities.filter(activity => {      
-        console.log(activity.itinerary._id);
+        //console.log(activity.itinerary._id);
         return activity.itinerary._id === itinerary._id;      
       });
   };
@@ -27,7 +27,7 @@ export class SlickSlider extends Component {
       this.props.itinerary,
       this.props.activities.activities
     );      
-    console.log(`Activities: ${activities}`);
+    //console.log(`Activities: ${activities}`);
     return (
       <div>
         <Slick ref="slick" {...settings}>
@@ -44,7 +44,7 @@ export class SlickSlider extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(`StateToProps Activities: ${state.activities}`);
+  //console.log(`StateToProps Activities: ${state.activities}`);
   return {
     activities: state.activities
   };

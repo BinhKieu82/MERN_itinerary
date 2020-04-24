@@ -17,7 +17,6 @@ const initialState = {
   isLoading: false,
   user: null,
   image: null,
-  favorites: []
 }
 
 export default function(state = initialState, action) {
@@ -28,8 +27,7 @@ export default function(state = initialState, action) {
         isLoading: true
       };
     case USER_LOADED:
-      console.log(action.payload);
-      
+      console.log('auth reducer:', action.payload);      
       return {
         ...state,
         isAuthenticated: true,
@@ -68,7 +66,7 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         isLoading: false,
         user: action.payload,
-        favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
+        //favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
       };
     case REMOVE_FAVORITE:
      // localStorage.setItem('token', action.payload.token);
@@ -78,9 +76,9 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         isLoading: false,
         user: action.payload,
-        favorites: state.favorites.filter(
-          itinerary => itinerary !== action.itinerary
-        )
+        // favorites: state.favorites.filter(
+        //   itinerary => itinerary !== action.itinerary
+        // )
       };
     default:
       return state;

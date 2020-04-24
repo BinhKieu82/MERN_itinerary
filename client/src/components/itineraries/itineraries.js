@@ -10,11 +10,11 @@ import M from "materialize-css";
 class Itineraries extends Component {
 
   async componentDidMount() {
-    console.log(`id: ${this.props.match.params.id}`);
+    //console.log(`id: ${this.props.match.params.id}`);
     await this.props.readItineraries(this.props.match.params.id);
     await this.props.readActivities(this.props.match.params.id);
     await this.props.fetchComments(this.props.match.params.id);
-    console.log('Activities:', this.props.activities);
+    //console.log('Activities:', this.props.activities);
   }
 
   componentDidUpdate() {
@@ -67,7 +67,7 @@ class Itineraries extends Component {
   }
 
   render() {
-    console.log(this.props.match.url);
+    //console.log(this.props.match.url);
     localStorage.setItem("url", this.props.match.url);
     return (
       <div className="itineraries">
@@ -79,7 +79,7 @@ class Itineraries extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(`State itineraries: ${state.itineraries}`);
+  //console.log(`State itineraries: ${state.itineraries}`);
   return {
     itineraries: state.itineraries
   };

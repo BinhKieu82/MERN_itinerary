@@ -20,7 +20,7 @@ router.get("/find/:id", auth, (req, res) => {
   })
   .delete("/find/:id", auth, (req, res) => {
     Comment.findById(req.params.id, (err, comment) => {
-      console.log('Comment Backend:req.params.name:', comment._id == req.params.id);
+      console.log('Comment Backend:req.params.name:', req.user.name);
       if (comment._id == req.params.id) { //comment.user.name === req.user.name could be better
         comment.remove(err => { //delete comment
           if (err) {

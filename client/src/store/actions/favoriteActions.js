@@ -22,17 +22,13 @@ export function fetchFavoritesFailure(error) {
 export const fetchFavorites = () => (dispatch, getState) => {
   dispatch(fetchingFavorites());
   axios
-    .get(`/itineraries/find/favorites/user`, tokenConfig(getState))
+    .get(`/users/favorites/user`, tokenConfig(getState)) //itineraries/find
     .then(res => {
-      console.log(
-        `Fontend Favorites itineraries: (${res.data.length}) ${res.data.map(
-          it => it.title
-        )}`
-      );
+      console.log( `fetchFavorites action: ${res.data}`);
       dispatch(fetchFavoritesSuccess(res.data));
     })
     .catch(err => {
-      console.log(err.response);
-      dispatch(fetchFavoritesFailure(err.response.data));
+      console.log('why?', err);
+      dispatch(fetchFavoritesFailure(err));
     });
 }

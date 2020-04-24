@@ -48,11 +48,11 @@ router.post("/", function(req, res, next) { //signup backend route
 
 //Get user for loaduser()/authActions react
 router.get('/user', auth, (req, res) => {
-  console.log("/user",req.user);
+  //console.log("backend/user",req.user);
   
   User.findById(req.user.id)
     .select('-password') //dis-regard password (not return password)
     .then(user => res.status(200).json(user)) //response user info without password to client
-})
+});
 
 module.exports = router;

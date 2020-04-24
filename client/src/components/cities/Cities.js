@@ -15,7 +15,7 @@ export class Cities extends Component {
     if (this.props.cities.cities.length === 0) {
       await this.props.readCities(); 
     }
-    console.log('cities',  this.props.cities);
+    //console.log('cities',  this.props.cities);
   }
 
   loader() {

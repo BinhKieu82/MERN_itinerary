@@ -20,8 +20,7 @@ const ItinerariesList = props => {
         } else if (
           props.itineraries[index].city.name ===
           props.itineraries[index - 1].city.name
-        ) {
-          console.log("same");
+        ) {          
           return <Itinerary key={index} itinerary={itinerary} />;
         } else {
           return (

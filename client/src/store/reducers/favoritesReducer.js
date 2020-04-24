@@ -9,12 +9,14 @@ export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {
     //when the call is ongoing
     case "FETCH_FAVORITES_DATA":
+      //console.log('Favorite reducer:', action.favorites);
       return {
         ...state,
         isLoading: true
       };
     //when the call to the API is a success
-    case "FETCH_FAVORITES_SUCCESS":
+    case "FETCH_FAVORITES_SUCCESS":     
+      console.log('Favorite reducer:', action.favorites); 
       return {
         ...state,
         payload: action.favorites,

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/userModel");
-const City = require("../models/cityModel");
 const Itinerary = require('../models/itineraryModel');
 const auth = require('../middleware/auth');
 
@@ -40,17 +39,39 @@ router.route("/:id").get(auth, (req, res) => {
 //   } 
 // });
 
-router.get("/favorites/user", auth, (req, res) => {
-  Itinerary.find({ _id: { $in: req.user.favorites } }) //find all 'id' in req.user.favorites array & matching with itinerary._id
-    .populate("city", "name")
-    .exec((err, itineraries) => {
-      if (err) {
-        res.status(400).send(err);
-        return;
-      }
-      console.log('backend itinerary._id:', itineraries);
-      res.json(itineraries); //response city object of an itinerary id matched
-    });
-});
+// router.get("/favorites/user", auth, (req, res) => {
+//   console.log('backend itinerary User :', req.user );
+//   User.findById({_id: req.user}).then (function(user) {
+//     console.log('backend User :', user );
+//     Itinerary.find({ _id: { $in: user.favorites } }) //find all 'id' in req.user.favorites array & matching with itinerary._id
+//       .populate("city", "name")
+//       .exec((err, itineraries) => {
+//         if (err) {
+//           res.status(400).send(err);
+//           return;
+//         }
+//         //console.log('backend itinerary._id:', itineraries);
+//         res.json(itineraries); //response city object of an itinerary id matched
+//       });
+//     }
+//   )
+// });
+
+// router.get("/favorites/user", auth, (req, res) => {
+//   console.log('backend itinerary User :', req.user );
+//   let favorites = [];
+//   User.findById(req.user.id)
+//     .select('-password')
+//     .populate("favorites")
+//     .exec((err, itineraries) => {
+//       if (err) {
+//         res.status(400).send(err);
+//         return;
+//       }
+//       console.log('backend user itinerary:', itineraries);
+//       res.json(itineraries);
+//     }); 
+//   console.log('backend itinerary favorites :', favorites );  
+// });
 
 module.exports = router;

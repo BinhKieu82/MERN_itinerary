@@ -9,7 +9,7 @@ import store from './store/store';
 
 class App extends Component {
   componentDidMount() {
-    
+    store.dispatch(loadUser());  
   }
   render() {
     return (
