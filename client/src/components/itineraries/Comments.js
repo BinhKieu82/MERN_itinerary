@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import M from "materialize-css";
 import {
   postComment,
-  deleteComment
+  deleteComment, 
+  fetchAllComments
 } from "../../store/actions/commentActions";
 import { NavLink } from "react-router-dom";
 import PropTypes from 'prop-types';
@@ -31,7 +32,12 @@ class Comments extends Component {
     auth: PropTypes.object.isRequired,
     comments: PropTypes.object.isRequired,
     postComment: PropTypes.func,
-    deleteComment: PropTypes.func
+    deleteComment: PropTypes.func,
+    fetchAllComments: PropTypes.func
+  }
+
+  componentDidMount() {    
+    this.props.fetchAllComments();   
   }
 
   //componentWillReceiveProps is deprecated
@@ -198,5 +204,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { postComment, deleteComment }
+  { postComment, deleteComment, fetchAllComments }
 )(Comments);

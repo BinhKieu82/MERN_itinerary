@@ -57,21 +57,19 @@ router.route("/:id").get(auth, (req, res) => {
 //   )
 // });
 
-// router.get("/favorites/user", auth, (req, res) => {
-//   console.log('backend itinerary User :', req.user );
-//   let favorites = [];
-//   User.findById(req.user.id)
-//     .select('-password')
-//     .populate("favorites")
-//     .exec((err, itineraries) => {
-//       if (err) {
-//         res.status(400).send(err);
-//         return;
-//       }
-//       console.log('backend user itinerary:', itineraries);
-//       res.json(itineraries);
-//     }); 
-//   console.log('backend itinerary favorites :', favorites );  
-// });
+router.get("/favorites/user", auth, (req, res) => {  
+  User.findById(req.user.id).then((user) => {
+    Itinerary.find({ _id: { $in: user.favorites } })
+    .populate("city", "name")
+    .exec((err, itineraries) => {
+      if (err) {
+        res.status(400).send(err);
+        return;
+      }
+      console.log('Backend itinerary userFavorites :', itineraries);  
+      res.json(itineraries);
+    });
+  })    
+});
 
 module.exports = router;

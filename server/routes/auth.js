@@ -47,7 +47,7 @@ router.post("/", function(req, res, next) { //signup backend route
 });
 
 //Get user for loaduser()/authActions react
-router.get('/user', auth, (req, res) => {
+router.get('/user/profile', auth, (req, res) => {
   //console.log("backend/user",req.user);
   
   User.findById(req.user.id)

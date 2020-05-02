@@ -1,4 +1,5 @@
 const express = require("express");
+const User = require("../models/userModel");
 const Comment = require("../models/commentModel");
 const router = express.Router();
 const auth = require('../middleware/auth');
@@ -19,21 +20,23 @@ router.get("/find/:id", auth, (req, res) => {
     });
   })
   .delete("/find/:id", auth, (req, res) => {
-    Comment.findById(req.params.id, (err, comment) => {
-      console.log('Comment Backend:req.params.name:', req.user.name);
-      if (comment._id == req.params.id) { //comment.user.name === req.user.name could be better
-        comment.remove(err => { //delete comment
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            //202 accepted
-            res.status(202).send("Comment deleted.");
-          }
-        });
-      } else {
-        res.status(401).send("You are not authorized to delete this comment.");
-      }
-    });
+    User.findById(req.user.id).then((user) => {
+      Comment.findById(req.params.id, (err, comment) => {
+        //console.log('Comment Backend:req.params.name:', user.name);
+        if (comment.user.name === user.name) { //comment._id == req.params.id could be better
+          comment.remove(err => { //delete comment
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              //202 accepted
+              res.status(202).send("Comment deleted.");
+            }
+          });
+        } else {
+          res.status(401).send("You are not authorized to delete this comment.");
+        }
+      });
+    })
   });
 
 router.get("/", auth, (req, res) => {

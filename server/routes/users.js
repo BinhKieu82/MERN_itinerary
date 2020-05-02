@@ -62,41 +62,46 @@ router.post("/", function(req, res, next) { //signup backend route
 });
 
 router.route("/favorites").put(auth, (req, res) => { //update the userModel
-  console.log('Backend user favorites:', req.user);
-  let isInArray = req.user.favorites.some(iti =>
-    iti.equals(req.body.itinerary) //id of itinerary requested from client
-  );
-  //console.log('Backend user/favorites:', isInArray);
-  if (!isInArray) {
-    User.findByIdAndUpdate(req.user.id, {
-      favorites: [...req.user.favorites, req.body.itinerary]
-    }).then(currentUser => {
-      res.status(201).send(req.body.itinerary);
-    });
-  } else {
-    User.findByIdAndUpdate(req.user.id, {
-      $pull: { //remove an id from itinerary array of userModel
-        favorites: req.body.itinerary
+  console.log('Backend user favorites:', req.user);   
+  User.findOne({ _id: req.user.id})
+    .then((user) => {
+      let isInArray = user.favorites.some(iti =>
+        iti.equals(req.body.itinerary) //id of itinerary requested from client
+      );
+      console.log('Backend Favorites status:', isInArray);
+      
+      if(isInArray) {
+        console.log('Backend Favorites remove:', req.body.itinerary);
+        User.findByIdAndUpdate(req.user.id, {
+          $pull: { //remove an id from itinerary array of userModel
+            favorites: req.body.itinerary
+          }
+        }).then(currentUser => {
+          res.status(202).send(req.body.itinerary);
+        }).catch(err => {res.send(err)});
+      } else{
+        console.log('Backend Favorites add:', req.body.itinerary);
+        User.findByIdAndUpdate(req.user.id, {
+          favorites: [...user.favorites, req.body.itinerary]
+        }).then(currentUser => {
+          res.status(201).send(req.body.itinerary);
+        }).catch(err => {res.send(err)});
       }
-    }).then(currentUser => {
-      res.status(202).send(req.body.itinerary);
-    }).catch(err => {res.send(err)});
-  }
+  });
 });
-
-router.get("/favorites/user", auth, (req, res) => {
-  //console.log('backend itinerary User :', req.user );
-  User.findById(req.user.id)
-    .select('-password')
-    .populate("favorites")
-    .exec((err, itineraries) => {
-      if (err) {
-        res.status(400).send(err);
-        return;
-      }
-      console.log('backend user itinerary:', itineraries);
-      res.json(itineraries);
-    }); 
-});
+// router.get("/favorites/user", auth, (req, res) => {
+//   //console.log('backend itinerary User :', req.user );
+//   User.findById(req.user.id)
+//     .select('-password')
+//     .populate("favorites")
+//     .exec((err, itineraries) => {
+//       if (err) {
+//         res.status(400).send(err);
+//         return;
+//       }
+//       console.log('backend user itinerary:', itineraries);
+//       res.json(itineraries);
+//     }); 
+// });
 
 module.exports = router;

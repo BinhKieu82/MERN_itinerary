@@ -17,6 +17,7 @@ const initialState = {
   isLoading: false,
   user: null,
   image: null,
+  favorites: []
 }
 
 export default function(state = initialState, action) {
@@ -27,7 +28,7 @@ export default function(state = initialState, action) {
         isLoading: true
       };
     case USER_LOADED:
-      console.log('auth reducer:', action.payload);      
+      console.log('authReducer userLoad:', action.payload);      
       return {
         ...state,
         isAuthenticated: true,
@@ -47,9 +48,8 @@ export default function(state = initialState, action) {
     case AUTH_ERROR:
     case LOGOUT_SUCCESS:
     case LOGIN_FAIL:
-    case REGISTER_FAIL:
-      console.log("FAIL", action.type);
-      
+    case REGISTER_FAIL:            
+      console.log("FAIL", action.type);      
       localStorage.removeItem('token');
       return {
         ...state,
@@ -58,27 +58,27 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false
       };
-    case ADD_FAVORITE:
-      //localStorage.setItem('token', action.payload.token);
+    case ADD_FAVORITE:      
+      console.log("authReducer favorite add", action.payload);
       return {
         ...state,  
-        ...action.payload,
+        //...action.payload,
         isAuthenticated: true,
-        isLoading: false,
-        user: action.payload,
-        //favorites: [...state.favorites, action.itinerary] //dispatch addFavorite(id) in authActions
+        //isLoading: false,
+        //user: action.payload, //causing lost authentication
+        favorites: [...state.favorites, action.payload] //dispatch addFavorite(id) in authActions
       };
-    case REMOVE_FAVORITE:
-     // localStorage.setItem('token', action.payload.token);
+    case REMOVE_FAVORITE:     
+     console.log("authReducer favorite remove", action.payload);
       return {
         ...state,
-        ...action.payload,
+        //...action.payload,
         isAuthenticated: true,
-        isLoading: false,
-        user: action.payload,
-        // favorites: state.favorites.filter(
-        //   itinerary => itinerary !== action.itinerary
-        // )
+        //isLoading: false,
+        //user: action.payload, //causing lost authentication
+        favorites: state.favorites.filter(
+          itinerary => itinerary !== action.payload
+        )
       };
     default:
       return state;

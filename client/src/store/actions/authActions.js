@@ -10,29 +10,31 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE
 } from './types';
 
-export function addFavorite(id) {
-  return {
-    type: "ADD_FAVORITE",
-    itinerary: id
-  };
-}
+// export function addFavorite(id) {
+//   return {
+//     type: "ADD_FAVORITE",
+//     itinerary: id
+//   };
+// }
 
-export function removeFavorite(id) {
-  return {
-    type: "REMOVE_FAVORITE",
-    itinerary: id
-  };
-}
+// export function removeFavorite(id) {
+//   return {
+//     type: "REMOVE_FAVORITE",
+//     itinerary: id
+//   };
+// }
 
 //check token & load user
 export const loadUser = () => (dispatch, getState) => {
   //User loading
   dispatch({ type: USER_LOADING });
   console.log('userloader', tokenConfig(getState));
-  axios.get('/auth/user', tokenConfig(getState))
+  axios.get('/auth/user/profile', tokenConfig(getState))
   .then(res => {
     console.log(res.data);
     
@@ -123,10 +125,18 @@ export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
     .then(res => {
       if (res.status === 201) {
         console.log(`Itinerary ${res.data} ADDED to your favorites.`);
-        dispatch(addFavorite(res.data));
+        // dispatch(addFavorite(res.data));
+        dispatch({
+          type: ADD_FAVORITE,
+          payload: res.data
+        })
       } else if (res.status === 202) {
         console.log(`Itinerary ${res.data} REMOVED from your favorites.`);
-        dispatch(removeFavorite(res.data));
+        // dispatch(removeFavorite(res.data));
+        dispatch({
+          type: REMOVE_FAVORITE,
+          payload: res.data
+        })
       }
     })
     .catch(err => {
