@@ -11,23 +11,12 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  // FETCHING_FAVORITES_DATA,
+  // FETCH_FAVORITES_SUCCESS,
+  // FETCH_FAVORITES_FAILURE,
   ADD_FAVORITE,
   REMOVE_FAVORITE
 } from './types';
-
-// export function addFavorite(id) {
-//   return {
-//     type: "ADD_FAVORITE",
-//     itinerary: id
-//   };
-// }
-
-// export function removeFavorite(id) {
-//   return {
-//     type: "REMOVE_FAVORITE",
-//     itinerary: id
-//   };
-// }
 
 //check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -36,8 +25,7 @@ export const loadUser = () => (dispatch, getState) => {
   console.log('userloader', tokenConfig(getState));
   axios.get('/auth/user/profile', tokenConfig(getState))
   .then(res => {
-    console.log(res.data);
-    
+    console.log('loadUser action:', res.data);    
     dispatch({ 
       type: USER_LOADED,
       payload: res.data //return from backend: {token, user {id, name, email}}
@@ -113,6 +101,31 @@ export const logout = () => { //no need dispatch
   };
 }
 
+// export const fetchFavorites = () => (dispatch, getState) => {
+//   //dispatch(fetchingFavorites());
+//   dispatch({
+//     type: FETCHING_FAVORITES_DATA
+//   });
+//   axios
+//     .get(`/itineraries/find/favorites/user`, tokenConfig(getState)) //itineraries/find
+//     .then(res => {
+//       console.log( `fetchFavorites action: ${res.data}`);
+//       dispatch({
+//         type: FETCH_FAVORITES_SUCCESS,
+//         payload: res.data
+//       })
+//       //dispatch(fetchFavoritesSuccess(res.data));
+//     })
+//     .catch(err => {
+//       console.log('why?', err);
+//       dispatch({
+//         type: FETCH_FAVORITES_FAILURE,
+//         error: err.data
+//       })
+//       //dispatch(fetchFavoritesFailure(err));
+//     });
+// }
+
 export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
   axios
     .put(
@@ -124,15 +137,13 @@ export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
     )
     .then(res => {
       if (res.status === 201) {
-        console.log(`Itinerary ${res.data} ADDED to your favorites.`);
-        // dispatch(addFavorite(res.data));
+        console.log(`Itinerary ${res.data} ADDED to your favorites.`);        
         dispatch({
           type: ADD_FAVORITE,
           payload: res.data
         })
       } else if (res.status === 202) {
         console.log(`Itinerary ${res.data} REMOVED from your favorites.`);
-        // dispatch(removeFavorite(res.data));
         dispatch({
           type: REMOVE_FAVORITE,
           payload: res.data

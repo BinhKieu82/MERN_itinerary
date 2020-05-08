@@ -26,14 +26,15 @@ class LoginModal extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   }
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
+    const { isAuthenticated } = this.props.auth;
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'LOGIN_FAIL') {
@@ -48,6 +49,7 @@ class LoginModal extends Component {
         this.toggle();
       }
     }
+    //console.log('login auth Update:', this.props.auth);
   }
 
   toggle = () => {    
@@ -130,10 +132,14 @@ class LoginModal extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
-});
+const mapStateToProps = state => {
+  console.log('login auth:', state.auth);
+  return {
+    auth: state.auth,
+    error: state.error
+  }
+};
+
 
 export default connect(
   mapStateToProps,

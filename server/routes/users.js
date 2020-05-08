@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken'); //token stored in www.jwt.io service for a specific time, not in MongoDB
 
-/* GET users listing. */
+/* GET users listing. Testing only */
 router.get("/", auth, function(req, res, next) {
   res.send("respond with a resource");
 });
@@ -66,7 +66,7 @@ router.route("/favorites").put(auth, (req, res) => { //update the userModel
   User.findOne({ _id: req.user.id})
     .then((user) => {
       let isInArray = user.favorites.some(iti =>
-        iti.equals(req.body.itinerary) //id of itinerary requested from client
+        iti == req.body.itinerary //id of itinerary requested from client
       );
       console.log('Backend Favorites status:', isInArray);
       

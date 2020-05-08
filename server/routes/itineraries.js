@@ -66,7 +66,7 @@ router.get("/favorites/user", auth, (req, res) => {
         res.status(400).send(err);
         return;
       }
-      console.log('Backend itinerary userFavorites :', itineraries);  
+      //console.log('Backend itinerary userFavorites :', itineraries);  
       res.json(itineraries);
     });
   })    

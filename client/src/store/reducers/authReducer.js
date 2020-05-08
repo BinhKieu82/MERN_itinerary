@@ -17,6 +17,7 @@ const initialState = {
   isLoading: false,
   user: null,
   image: null,
+  error: {},
   favorites: []
 }
 
@@ -56,20 +57,22 @@ export default function(state = initialState, action) {
         token: null,
         user: null,
         isAuthenticated: false,
+        error: action.error,
         isLoading: false
       };
     case ADD_FAVORITE:      
       console.log("authReducer favorite add", action.payload);
+      console.log("authReducer favorite state", state.favorites);
       return {
         ...state,  
-        //...action.payload,
+        error: {},
         isAuthenticated: true,
-        //isLoading: false,
+        isLoading: false,
         //user: action.payload, //causing lost authentication
         favorites: [...state.favorites, action.payload] //dispatch addFavorite(id) in authActions
       };
     case REMOVE_FAVORITE:     
-     console.log("authReducer favorite remove", action.payload);
+      console.log("authReducer favorite remove", action.payload);
       return {
         ...state,
         //...action.payload,

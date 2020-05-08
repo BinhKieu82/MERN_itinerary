@@ -37,7 +37,8 @@ router.post("/", function(req, res, next) { //signup backend route
                 user: {                  
                   id: user.id,
                   name: user.name,
-                  email: user.email                  
+                  email: user.email,
+                  favorites: user.favorites  //missing causing auth.favorites undefine in Heart component                
                 }
               });
             }
@@ -46,7 +47,7 @@ router.post("/", function(req, res, next) { //signup backend route
     })
 });
 
-//Get user for loaduser()/authActions react
+//Get user for loadUser()/authActions react
 router.get('/user/profile', auth, (req, res) => {
   //console.log("backend/user",req.user);
   

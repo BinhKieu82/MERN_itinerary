@@ -16,7 +16,7 @@ export default function favoritesReducer(state = initialState, action) {
       };
     //when the call to the API is a success
     case "FETCH_FAVORITES_SUCCESS":     
-      console.log('Favorite reducer:', action.favorites); 
+      console.log('Favorite reducer fetch:', action.favorites); 
       return {
         ...state,
         payload: action.favorites,

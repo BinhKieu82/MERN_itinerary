@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+//import { loadUser } from '../../store/actions/authActions';
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal';
 import Logout from './Logout';
@@ -35,6 +36,10 @@ class AppNavbar extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
+
+  // componentDidMount() {
+  //   this.props.loadUser();  
+  // }
 
   toggle = () => {
     this.setState({
