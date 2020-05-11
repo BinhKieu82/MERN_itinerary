@@ -113,27 +113,27 @@ class LoginModal extends Component {
                 <Button color='dark' style={{ marginTop: '2rem'}} block>
                   Login
                 </Button>
+                <div className='googlelogin'>
+                  <img
+                    className='google-login-btn'
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NABN7FsJQ8rVSl_iRB5zO8vnOzf6Vck1XPNozMxQ7xkBcEjU"
+                    alt="google login logo"
+                    // onClick={() =>
+                    //   (window.location = "http://localhost:5000/auth/google")
+                    // }
+                  />
+                </div>
               </FormGroup>
             </Form>
           </ModalBody>
-        </Modal>
-        {/* <div>
-          <img
-            className="google-login-btn"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NABN7FsJQ8rVSl_iRB5zO8vnOzf6Vck1XPNozMxQ7xkBcEjU"
-            alt="google login logo"
-            // onClick={() =>
-            //   (window.location = "http://localhost:5000/auth/google")
-            // }
-          />
-        </div> */}
+        </Modal>        
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('login auth:', state.auth);
+  //console.log('login auth:', state.auth);
   return {
     auth: state.auth,
     error: state.error

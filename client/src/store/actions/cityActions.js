@@ -1,6 +1,5 @@
 import axios from 'axios';
 //import { tokenConfig } from './authActions';
-//import * as types from './actionTypes';
 
 
 export function readingCities() {

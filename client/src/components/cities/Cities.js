@@ -6,11 +6,7 @@ import Footer from "../Footer.js";
 import { readCities } from "../../store/actions/cityActions";
 
 export class Cities extends Component {
-  constructor(props) {
-    super(props);
-    this.state = [];
-  }
-
+  
   async componentWillMount() {
     if (this.props.cities.cities.length === 0) {
       await this.props.readCities(); 

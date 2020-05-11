@@ -2768,7 +2768,7 @@
     float: none;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     .pagination {
       width: 100%;
     }
@@ -2781,7 +2781,7 @@
       overflow: hidden;
       white-space: nowrap;
     }
-  }
+  } */
   
   .breadcrumb {
     font-size: 18px;
@@ -2869,7 +2869,7 @@
   /*********************
     Media Query Classes
   **********************/
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     .hide-on-small-only, .hide-on-small-and-down {
       display: none !important;
     }
@@ -2945,7 +2945,7 @@
     .center-on-small-only {
       text-align: center;
     }
-  }
+  } */
   
   .page-footer {
     padding-top: 20px;
@@ -3021,14 +3021,14 @@
     border-radius: 2px;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     table.responsive-table {
       width: 100%;
       border-collapse: collapse;
       border-spacing: 0;
       display: block;
       position: relative;
-      /* sort out borders */
+      /* sort out borders 
     }
     table.responsive-table td:empty:before {
       content: '\00a0';
@@ -3080,7 +3080,7 @@
       border: 0;
       border-right: 1px solid rgba(0, 0, 0, 0.12);
     }
-  }
+  } */
   
   .collection {
     margin: 0.5rem 0 1rem 0;
@@ -3438,7 +3438,7 @@
     width: 90%;
   }
   
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     .container {
       width: 85%;
     }
@@ -3448,7 +3448,7 @@
     .container {
       width: 70%;
     }
-  }
+  } */
   
   .col .row {
     margin-left: -0.75rem;
@@ -3724,7 +3724,7 @@
     left: 100%;
   }
   
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     .row .col.m1 {
       width: 8.3333333333%;
       margin-left: auto;
@@ -4271,7 +4271,7 @@
     .row .col.push-xl12 {
       left: 100%;
     }
-  }
+  } */
   
   /* nav {
     color: #fff;
@@ -4313,11 +4313,11 @@
     height: 100%;
   }
   
-  @media only screen and (min-width: 993px) {
+  /* @media only screen and (min-width: 993px) {
     nav a.sidenav-trigger {
       display: none;
     }
-  }
+  } */
   
   nav .sidenav-trigger {
     float: left;
@@ -4346,7 +4346,7 @@
             transform: translateX(-50%);
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     nav .brand-logo {
       left: 50%;
       -webkit-transform: translateX(-50%);
@@ -4364,7 +4364,7 @@
       right: 0.5rem;
       left: auto;
     }
-  }
+  } */
   
   nav .brand-logo.right {
     right: 0.5rem;
@@ -4475,7 +4475,7 @@
     position: fixed;
   }
   
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     nav.nav-extended .nav-wrapper {
       min-height: 64px;
     }
@@ -4486,7 +4486,7 @@
     .navbar-fixed {
       height: 64px;
     }
-  }
+  } */
   
   a {
     text-decoration: none;
@@ -4499,7 +4499,7 @@
     color: rgba(0, 0, 0, 0.87);
   }
   
-  @media only screen and (min-width: 0) {
+  /* @media only screen and (min-width: 0) {
     html {
       font-size: 14px;
     }
@@ -4515,7 +4515,7 @@
     html {
       font-size: 15px;
     }
-  }
+  } */
   
   /* h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
@@ -4582,7 +4582,7 @@
     font-weight: 200;
   }
   
-  @media only screen and (min-width: 360px) {
+  /* @media only screen and (min-width: 360px) {
     .flow-text {
       font-size: 1.2rem;
     }
@@ -4712,7 +4712,7 @@
     .flow-text {
       font-size: 1.2rem;
     }
-  }
+  } */
   
   .scale-transition {
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important;
@@ -4953,7 +4953,7 @@
     z-index: 10000;
   }
   
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     #toast-container {
       min-width: 100%;
       bottom: 9%;
@@ -4974,7 +4974,7 @@
       right: 7%;
       max-width: 86%;
     }
-  }
+  } */
   
   .toast {
     border-radius: 2px;
@@ -5017,12 +5017,12 @@
     border-radius: 24px;
   }
   
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     .toast {
       width: 100%;
       border-radius: 0;
     }
-  }
+  } */
   
   .tabs {
     position: relative;
@@ -5115,7 +5115,7 @@
     will-change: left, right;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     .tabs {
       display: -webkit-box;
       display: -webkit-flex;
@@ -5131,7 +5131,7 @@
     .tabs .tab a {
       padding: 0 12px;
     }
-  }
+  } */
   
   .material-tooltip {
     padding: 10px 8px;
@@ -5771,12 +5771,12 @@
     outline: none;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     .modal {
       width: 80%;
     }
   }
-  
+   */
   .modal h1, .modal h2, .modal h3, .modal h4 {
     margin-top: 0;
   }
@@ -6607,7 +6607,7 @@
     margin-left: 3rem;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     .input-field .prefix ~ input {
       width: 86%;
       width: calc(100% - 3rem);
@@ -6619,7 +6619,7 @@
       width: 80%;
       width: calc(100% - 3rem);
     }
-  }
+  } */
   
   /* Search Field */
   .input-field input[type=search] {
@@ -7713,7 +7713,7 @@
     left: auto;
   }
   
-  @media only screen and (max-width: 992px) {
+  /* @media only screen and (max-width: 992px) {
     .sidenav.sidenav-fixed {
       -webkit-transform: translateX(-105%);
               transform: translateX(-105%);
@@ -7728,7 +7728,7 @@
     .sidenav .user-view {
       padding: 16px 16px 0;
     }
-  }
+  } */
   
   .sidenav .collapsible-body > ul:not(.collapsible) > li.active,
   .sidenav.sidenav-fixed .collapsible-body > ul:not(.collapsible) > li.active {
@@ -8584,12 +8584,12 @@
     background: none;
   }
   
-  @media only screen and (max-width: 600px) {
+  /* @media only screen and (max-width: 600px) {
     .tap-target, .tap-target-wrapper {
       width: 600px;
       height: 600px;
     }
-  }
+  } */
   
   .pulse {
     overflow: visible;
@@ -8841,7 +8841,7 @@
   }
   
   /* Media Queries */
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     .datepicker-modal {
       max-width: 625px;
     }
@@ -8866,7 +8866,7 @@
     .datepicker-day-button {
       line-height: 44px;
     }
-  }
+  } */
   
   /* Timepicker Containers */
   .timepicker-modal {
@@ -9065,7 +9065,7 @@
   }
   
   /* Media Queries */
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     .timepicker-modal {
       max-width: 600px;
     }
@@ -9086,5 +9086,5 @@
       text-align: center;
       margin-top: 1.2rem;
     }
-  }
+  } */
   

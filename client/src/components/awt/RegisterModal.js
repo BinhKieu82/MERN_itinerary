@@ -27,14 +27,15 @@ class RegisterModal extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   }
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
+    const { isAuthenticated } = this.props.auth;
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'REGISTER_FAIL') {
@@ -120,7 +121,17 @@ class RegisterModal extends Component {
                   />
                 <Button color='dark' style={{ marginTop: '2rem'}} block>
                   Register
-                </Button>
+                </Button>                
+                <div className='googlelogin'>
+                  <img
+                    className="google-login-btn"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NABN7FsJQ8rVSl_iRB5zO8vnOzf6Vck1XPNozMxQ7xkBcEjU"
+                    alt="google login logo"
+                    // onClick={() =>
+                    //   (window.location = "http://localhost:5000/auth/google")
+                    // }
+                  />
+                </div>
               </FormGroup>
             </Form>
           </ModalBody>
@@ -130,10 +141,13 @@ class RegisterModal extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
-});
+const mapStateToProps = state => {
+  //console.log('Register auth:', state.auth);
+  return {
+    auth: state.auth,
+    error: state.error
+  }
+};
 
 export default connect(
   mapStateToProps,

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ItinerariesList from "./itinerariesList";
-//import {Favorite} from "./favorite";
 import { fetchFavorites } from "../../store/actions/favoriteActions";
 import { fetchAllComments } from "../../store/actions/commentActions";
 import Footer from "../Footer";
@@ -49,16 +48,12 @@ class Favorites extends Component {
 
   content() {
     const favorites = this.props.favorites.payload;
-    console.log('Favorites:', favorites);
+    //console.log('Favorites:', favorites);
     if (Object.keys(this.props.favorites.error).length === 0) {
       return (
         <div className="itinerary-city">
           <h1>Favorite Itineraries</h1>
-          <ul className="collapsible">
-            {/* <Favorite 
-              favorites={favorites}
-              //fav={true}
-            /> */}
+          <ul className="collapsible">            
             <ItinerariesList
               itineraries={favorites} //array of itinerary._id
               fav={true}
@@ -77,8 +72,7 @@ class Favorites extends Component {
     }
   }
 
-  render() {   
-   
+  render() {
     //console.log('Favorite itinerary render:', this.state.itineraries);
     return (     
       <div className="itineraries">

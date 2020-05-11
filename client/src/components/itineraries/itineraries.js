@@ -56,10 +56,11 @@ class Itineraries extends Component {
         </div>
       );
     } else {
+      console.log('itineraries error:', this.props.itineraries.error.msg)
       return (
         <>
           <div className="alert">
-            <p>{this.props.itineraries.error.message}</p>
+            <p>{this.props.itineraries.error.msg}</p>
           </div>
         </>
       );

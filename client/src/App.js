@@ -4,6 +4,7 @@ import { loadUser } from './store/actions/authActions';
 import Routing from "./route/route";
 import AppNavbar from "./components/awt/AppNavbar";
 import "./styles/materialize.css";
+import "./styles/mediaquerry.css";
 import "./styles/App.css";
 import store from './store/store';
 

@@ -11,9 +11,6 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  // FETCHING_FAVORITES_DATA,
-  // FETCH_FAVORITES_SUCCESS,
-  // FETCH_FAVORITES_FAILURE,
   ADD_FAVORITE,
   REMOVE_FAVORITE
 } from './types';
@@ -22,7 +19,7 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   //User loading
   dispatch({ type: USER_LOADING });
-  console.log('userloader', tokenConfig(getState));
+  //console.log('userloader', tokenConfig(getState));
   axios.get('/auth/user/profile', tokenConfig(getState))
   .then(res => {
     console.log('loadUser action:', res.data);    
@@ -100,31 +97,6 @@ export const logout = () => { //no need dispatch
     type: LOGOUT_SUCCESS
   };
 }
-
-// export const fetchFavorites = () => (dispatch, getState) => {
-//   //dispatch(fetchingFavorites());
-//   dispatch({
-//     type: FETCHING_FAVORITES_DATA
-//   });
-//   axios
-//     .get(`/itineraries/find/favorites/user`, tokenConfig(getState)) //itineraries/find
-//     .then(res => {
-//       console.log( `fetchFavorites action: ${res.data}`);
-//       dispatch({
-//         type: FETCH_FAVORITES_SUCCESS,
-//         payload: res.data
-//       })
-//       //dispatch(fetchFavoritesSuccess(res.data));
-//     })
-//     .catch(err => {
-//       console.log('why?', err);
-//       dispatch({
-//         type: FETCH_FAVORITES_FAILURE,
-//         error: err.data
-//       })
-//       //dispatch(fetchFavoritesFailure(err));
-//     });
-// }
 
 export const postFavorite = (id) => (dispatch, getState) => { //(id) = payload
   axios

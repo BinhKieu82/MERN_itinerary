@@ -50,7 +50,8 @@ router.post("/", function(req, res, next) { //signup backend route
                     user: {                  
                       id: user.id,
                       name: user.name,
-                      email: user.email                  
+                      email: user.email,
+                      favorites: user.favorites //missing causing auth.favorites undefine in Heart component & register               
                     }
                   });
                 }
@@ -68,7 +69,7 @@ router.route("/favorites").put(auth, (req, res) => { //update the userModel
       let isInArray = user.favorites.some(iti =>
         iti == req.body.itinerary //id of itinerary requested from client
       );
-      console.log('Backend Favorites status:', isInArray);
+      //console.log('Backend Favorites status:', isInArray);
       
       if(isInArray) {
         console.log('Backend Favorites remove:', req.body.itinerary);
@@ -89,19 +90,5 @@ router.route("/favorites").put(auth, (req, res) => { //update the userModel
       }
   });
 });
-// router.get("/favorites/user", auth, (req, res) => {
-//   //console.log('backend itinerary User :', req.user );
-//   User.findById(req.user.id)
-//     .select('-password')
-//     .populate("favorites")
-//     .exec((err, itineraries) => {
-//       if (err) {
-//         res.status(400).send(err);
-//         return;
-//       }
-//       console.log('backend user itinerary:', itineraries);
-//       res.json(itineraries);
-//     }); 
-// });
 
 module.exports = router;

@@ -30,33 +30,6 @@ router.route("/:id").get(auth, (req, res) => {
     });
 });
 
-// router.get('/:id', async (req, res, next) => { //query an itinerary   
-//   try {
-//     const itineraries = await Itinerary.find({city: req.params.id}); //point to ref model "City"
-//     res.json(itineraries);
-//   } catch (error) {
-//     next(error);
-//   } 
-// });
-
-// router.get("/favorites/user", auth, (req, res) => {
-//   console.log('backend itinerary User :', req.user );
-//   User.findById({_id: req.user}).then (function(user) {
-//     console.log('backend User :', user );
-//     Itinerary.find({ _id: { $in: user.favorites } }) //find all 'id' in req.user.favorites array & matching with itinerary._id
-//       .populate("city", "name")
-//       .exec((err, itineraries) => {
-//         if (err) {
-//           res.status(400).send(err);
-//           return;
-//         }
-//         //console.log('backend itinerary._id:', itineraries);
-//         res.json(itineraries); //response city object of an itinerary id matched
-//       });
-//     }
-//   )
-// });
-
 router.get("/favorites/user", auth, (req, res) => {  
   User.findById(req.user.id).then((user) => {
     Itinerary.find({ _id: { $in: user.favorites } })

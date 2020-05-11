@@ -38,7 +38,7 @@ router.post("/", function(req, res, next) { //signup backend route
                   id: user.id,
                   name: user.name,
                   email: user.email,
-                  favorites: user.favorites  //missing causing auth.favorites undefine in Heart component                
+                  favorites: user.favorites  //missing causing auth.favorites undefine in Heart component & login           
                 }
               });
             }

@@ -1,6 +1,5 @@
 import React from "react";
 import { Itinerary } from "./itinerary.js";
-//import Footer from '../Footer';
 
 const ItinerariesList = props => {
   if (props.fav) {
@@ -29,8 +28,7 @@ const ItinerariesList = props => {
                 key={index}
                 itinerary={itinerary}
                 city={itinerary.city.name}
-              />
-              {/* <Footer back={ '/cities' }/>  */}
+              />              
             </div>
           );
         }

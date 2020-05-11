@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
     case LOGOUT_SUCCESS:
     case LOGIN_FAIL:
     case REGISTER_FAIL:            
-      console.log("FAIL", action.type);      
+      //console.log("FAIL", action.type);      
       localStorage.removeItem('token');
       return {
         ...state,
@@ -68,17 +68,13 @@ export default function(state = initialState, action) {
         error: {},
         isAuthenticated: true,
         isLoading: false,
-        //user: action.payload, //causing lost authentication
         favorites: [...state.favorites, action.payload] //dispatch addFavorite(id) in authActions
       };
     case REMOVE_FAVORITE:     
       console.log("authReducer favorite remove", action.payload);
       return {
         ...state,
-        //...action.payload,
         isAuthenticated: true,
-        //isLoading: false,
-        //user: action.payload, //causing lost authentication
         favorites: state.favorites.filter(
           itinerary => itinerary !== action.payload
         )

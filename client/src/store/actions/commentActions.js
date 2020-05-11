@@ -47,7 +47,7 @@ export const fetchAllComments = () => (dispatch, getState) => {
     .get(`/comments`, tokenConfig(getState))
     .then(res => {
       dispatch(fetchCommentsSuccess(res.data));
-      console.log(`comments section: Authorized.`);
+      //console.log(`comments section: Authorized.`);
     })
     .catch(err => {
       console.log(`comments section: ${err.response.data}`);

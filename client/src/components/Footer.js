@@ -12,7 +12,6 @@ export class Footer extends Component {
           </NavLink>
           <NavLink className="home-icon" to="/">
             <i className="material-icons">home</i>
-            {/* <MaterialIcon icon="home" invert size="40" /> */}
           </NavLink>
           <div className="home-icon hidden-icon">
             <i className="material-icons">chevron_right</i>
@@ -24,7 +23,6 @@ export class Footer extends Component {
         <div className="footer">
           <NavLink className="home-icon" to="/">
             <i className="material-icons">home</i>
-            {/* <MaterialIcon icon="home" invert size="40" /> */}
           </NavLink>
         </div>
       );

@@ -14,6 +14,7 @@ export default function itinerariesReducer(state = initialState, action) {
       };
     //API call is a success
     case "READ_ITINERARIES_SUCCESS":
+      //console.log('itineraryReducer payload:', action.itineraries);
       return {
         ...state,
         itineraries: action.itineraries, //res.data in itineraryActions
@@ -22,6 +23,7 @@ export default function itinerariesReducer(state = initialState, action) {
       };
     //API call failure
     case "READ_ITINERARIES_FAILURE":
+      //console.log('itineraryReducer error:', action.error); 
       return {
         ...state,
         error: action.error,
