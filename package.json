@@ -4,7 +4,8 @@
   "description": "MYitinerary project - backend part",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"nodemon server.js\" \"cd ./client && npm start\"",
+    "start": "concurrently \"node server.js\" \"cd ./client && npm start\"",
+    "dev": "concurrently \"nodemon server.js\" \"cd ./client && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
     "server:dev": "nodemon --inspect server.js"
